@@ -8,8 +8,13 @@ class Picture < ApplicationRecord
       'id' => nil,
       'updated_at' => nil,
       'created_at' => nil,
-      'attachment_url' => nil
+      'attachment_url' => nil,
+      'original_attachment_url' => nil,
     }
+  end
+
+  def original_attachment_url
+      Rails.application.routes.url_helpers.rails_blob_path(attachment, only_path: true)
   end
 
   def attachment_url
