@@ -1,7 +1,10 @@
 class Picture < ApplicationRecord
   include ActiveModel::Serializers::JSON
 
+  belongs_to :record, polymorphic: true
   has_one_attached :attachment
+  delegate_missing_to :attachment
+  scope :positioned, -> { order(position: :asc) }
 
   def attributes
     {

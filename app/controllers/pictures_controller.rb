@@ -4,6 +4,12 @@ class PicturesController < ApplicationController
     render json: Picture.all.with_attached_attachment.order(id: :desc)
   end
 
+   # GET /picture/1
+   def show
+    render json: @picture
+  end
+
+
   def create
     picture = Picture.new(picture_params)
 
@@ -17,6 +23,6 @@ class PicturesController < ApplicationController
   private
 
   def picture_params
-    params.require(:picture).permit(:attachment)
+    params.require(:picture).permit(:attachment, :record_type, :record_id)
   end
 end
